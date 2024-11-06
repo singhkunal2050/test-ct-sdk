@@ -28,7 +28,7 @@ function App() {
       <div>
           <nav data-count={count}>
           {count % 2 ? <div id="bell-selector">🛎️</div> : ''}
-          <button onClick={pushEvent}>Push Event</button>
+          <button onClick={pushEvent}>Push Event For Web Inbox Notification</button>
          </nav>
 
         <h1>Clevertap Web SDK SPA Test</h1>
