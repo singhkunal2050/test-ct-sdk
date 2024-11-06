@@ -33,6 +33,7 @@ function App() {
 
         <h1>Clevertap Web SDK SPA Test</h1>
         <div className="card">
+          <p>Increment Count to rerender the Inbox Icon</p>
           <button onClick={() => setCount((count) => count + 1)}>
             count is {count}
           </button>
