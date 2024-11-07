@@ -27,7 +27,7 @@ function App() {
     <>
       <div>
           <nav data-count={count}>
-          {count % 2 ? <div id="bell-selector">🛎️</div> : ''}
+          {count % 2 == 0 ? <div id="bell-selector">🛎️</div> : ''}
           <button onClick={pushEvent}>Push Event For Web Inbox Notification</button>
          </nav>
 
