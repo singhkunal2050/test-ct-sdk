@@ -1,14 +1,25 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "clevertap_sw.js", // Path to your service worker
+          dest: "", // Destination directory within the dist folder
+        },
+      ],
+    }),
+  ],
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"), // Static HTML page
-        spa: resolve(__dirname, "spa.html"), // Entry point for SPA
+        main: resolve(__dirname, "index.html"),
+        spa: resolve(__dirname, "spa.html"),
       },
     },
   },
