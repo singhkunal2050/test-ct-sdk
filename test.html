@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="manifest" href="/web-sdk-test/manifest.json" />
+    <script>
+      const personalizedSelectors = [
+        "#bell-selector",
+        ".nav",
+        "#constantOUL",
+        "#testdifferentimg",
+      ];
+      const delay = 2000; //time in ms;
+      (function (personalizedSelectors, delayTime) {
+        const retryElements = {}; // Track selectors that need retry
+        let retryCount = 0; // Counter for retries
+        let retryInterval;
+        function isInViewport(element) {
+          const rect = element.getBoundingClientRect();
+          const { innerHeight: windowHeight, innerWidth: windowWidth } = window;
+          return (
+            rect.bottom > 0 &&
+            rect.right > 0 &&
+            rect.top < windowHeight &&
+            rect.left < windowWidth
+          );
+        }
+        (function () {
+          const styleContent = `
+        .anti-flicker-hide {
+          opacity: 0 !important
+        }
+        .anti-flicker-show {
+          transition: opacity 0.5s, filter 0.5s !important
+        }
+      `;
+          // Create and append the style element if it doesn't exist
+          const styleId = "flicker-style";
+          if (!document.getElementById(styleId)) {
+            const styleElement = document.createElement("style");
+            styleElement.id = styleId;
+            styleElement.textContent = styleContent;
+            document.head.appendChild(styleElement);
+          }
+        })();
+        function applyAntiFlicker(selectors) {
+          function processSelectors(selectorElements) {
+            const elements = [];
+            selectorElements.forEach((selector) => {
+              const matchedElements = document.querySelectorAll(selector);
+              if (matchedElements.length) {
+                matchedElements.forEach((el) => {
+                  console.log(isInViewport(el));
+                  if (!isInViewport(el)) {
+                    console.log(el);
+                    elements.push(el);
+                  }
+                });
+                delete retryElements[selector]; // Successfully processed, remove from retry list
+              } else {
+                retryElements[selector] = false; // Add to retry list if not found
+              }
+            });
+            applyStyles(elements);
+          }
+          function retryProcessing() {
+            processSelectors(Object.keys(retryElements));
+            retryCount++;
+            if (Object.keys(retryElements).length === 0 || retryCount > 20) {
+              retryCount = 0;
+              clearInterval(retryInterval);
+            }
+          }
+          processSelectors(selectors);
+          if (Object.keys(retryElements).length) {
+            retryInterval = setInterval(retryProcessing, 100);
+          }
+        }
+        function applyStyles(elements) {
+          elements.forEach((el) => el.classList.add("anti-flicker-hide"));
+          setTimeout(() => {
+            elements.forEach((el) => {
+              el.classList.remove("anti-flicker-hide");
+              el.classList.add("anti-flicker-show");
+            });
+          }, delayTime); // Apply styles after maxRenderTime
+        }
+        function observeUrlChange() {
+          let previousHref = document.location.href;
+          const observer = new MutationObserver(() => {
+            if (previousHref !== document.location.href) {
+              previousHref = document.location.href;
+              applyAntiFlicker(personalizedSelectors);
+            }
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+        }
+        window.addEventListener("load", () => {
+          observeUrlChange();
+          applyAntiFlicker(personalizedSelectors);
+        });
+      })(personalizedSelectors, delay);
+    </script>
+
+    <script type="text/javascript">
+      const queryParams = new URLSearchParams(window.location.search);
+      const accountId = queryParams.get("accountId");
+      const region = queryParams.get("region");
+      var clevertap = { event: [], profile: [], account: [], region };
+      //	var clevertap = { event: [], profile: [], account: [], region: 'wus2', targetDomain: 'clevertap-prod-az.com' };
+      clevertap.account.push({ id: accountId }); // Web Squad
+      //	             clevertap.account.push({ id: "WR5-Z98-W56Z" }); // Web Testing
+      //	              clevertap.account.push({ id: "W48-KW4-656Z" }); // WCC Team returns
+      //             clevertap.account.push({ id: "RK4-898-W85Z" }); // WA rollout qa
+      //clevertap.account.push({ id: "WRK-485-456Z" }); // Web Testing RK8-84W-K66Z
+      //		clevertap.account.push({ id: "RK8-84W-K66Z" }); // NPS Test
+
+      (function () {
+        var wzrk = document.createElement("script");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+        //    wzrk.src = "a.js";
+        //wzrk.src = "web_personalization_new_sdk";
+        //	  wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+        //	    wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@prompt_bugfix/clevertap.js';
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@web-2622-message-pivot-id/clevertap.min.js';
+        //	     wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@task/visual-editor-security/clevertap.min.js';
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@master/clevertap.js';
+        //	    wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@task/SDK-3194/inbox_msg_order/clevertap.js';
+        //    wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@task/SDK-2678/frequency_caps/clevertap.js';
+        //    wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@task/SDK-2521/popup_imageonly/clevertap.js';
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@task/SDK-2041/web_inbox/clevertap.js'
+        wzrk.src =
+          "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@09b8ea6e402d2f92dbbabe625411baf28b188751/clevertap.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.addEventListener("CT_web_personalization", function (event) {
+        const data = event.detail;
+        const topic = data.kv.topic;
+        switch (topic) {
+          case "Cart drop-off": {
+            renderCartDropOffPersonalisationCampaign(data);
+            break;
+          }
+        }
+      });
+
+      function renderCartDropOffPersonalisationCampaign(data) {
+        const name = data.kv.Name;
+        const product = data.kv.Cart;
+
+        // Add your custom rendering logic here
+
+        // raise notification viewed event
+        clevertap.renderNotificationViewed(data);
+        clevertap.renderNotificationClicked(data);
+
+        /**
+         * You may want to track click on the entire popup that you just rendered or on a button within it.
+         * To do so, you’ll have to add below line within the click listeners of the popup/button
+         * `clevertap.renderNotificationClicked(data);`
+         * Ex: If you had a button with id shopNow and are using jQuery, you’d simply have to do
+         * $(‘#shopNow’).click(() => { clevertap.renderNotificationClicked(data); })
+         */
+      }
+
+      function pushprofile() {
+        var id = makeid(5);
+        clevertap.profile.push({
+          Site: {
+            Name: "User " + id, // User's name
+            Email: id + "@clevertap.com", // User's email
+            Phone: "+917710004770", // User's phone with country code
+            Gender: "aasd", // Can be either M or F
+            Employed: "Y", // Can be either Y or N
+            Education: "Graduate", // Can be either School, College or Graduate
+            Married: "Y", // Can be either Y or N
+            DOB: $WZRK_WR.setDate(20150501), // Set date in format yyyymmdd
+            Language: "Deutsche",
+            "MSG-email": true, // Disable email notifications
+            "MSG-push": true, // Enable push notifications
+            "MSG-sms": true, // Enable sms notifications
+          },
+        });
+        console.log("pushprofile successful");
+      }
+
+      function pushbid() {
+        clevertap.event.push("Place Bid");
+        console.log("place bid");
+      }
+
+      function pushcharged() {
+        clevertap.event.push("Charged", {
+          "Product name": "Casio Chronograph Watch",
+          ts: new Date(),
+        });
+        console.log("push charged");
+      }
+
+      function pushProductSearched() {
+        clevertap.event.push("Product Searched");
+        console.log("push Product Searched");
+      }
+
+      function pushEventAddToCart() {
+        clevertap.event.push("Added to Cart", {
+          "Product ID": "pr_57235721c9f9a1",
+          "product name": "Lamb Curry Cut1",
+          Price: 298,
+          Long_1: 6473329386,
+          Long_2: 2,
+          Currency: "INR",
+        });
+      }
+
+      function clearLocalStorage() {
+        localStorage.clear();
+      }
+
+      function makeid(length) {
+        var text = "";
+        var possible =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < length; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+      }
+
+      function logout() {
+        clevertap.logout();
+      }
+
+      function onClickOUL() {
+        clevertap.onUserLogin.push({
+          Site: {
+            Email: `qw${Math.ceil(Math.random() * 10002312)}@gmail.com`,
+            // Email: "799726789@gmail.com"
+          },
+        });
+        getLS();
+      }
+
+      function onClickOULSame() {
+        let value = document.getElementById("constantOUL").value;
+        clevertap.onUserLogin.push({
+          Site: {
+            // Email: `${Math.ceil(Math.random() * 100012)}@gmail.com`
+            Email: `${value}@gmail.com`,
+          },
+        });
+        getLS();
+      }
+
+      function onClickOULIdentitySame() {
+        let value = document.getElementById("constantOULIdentity").value;
+        clevertap.onUserLogin.push({
+          Site: {
+            // Email: `${Math.ceil(Math.random() * 100012)}@gmail.com`
+            Identity: `${value}`,
+          },
+        });
+        getLS();
+      }
+
+      function onClickPP() {
+        clevertap.profile.push({
+          Site: {
+            Email: `as${Math.ceil(Math.random() * 10002320)}@gmail.com`,
+          },
+        });
+        getLS();
+      }
+
+      function onClickPPSame() {
+        let value = document.getElementById("constantPP").value;
+        clevertap.profile.push({
+          Site: {
+            Email: `${value}@gmail.com`,
+          },
+        });
+      }
+
+      function onClickPPIdentitySame() {
+        let value = document.getElementById("constantPPIdentity").value;
+        clevertap.profile.push({
+          Site: {
+            Identity: `${value}`,
+          },
+        });
+      }
+
+      function onClickEP() {
+        clevertap.event.push("Product Eaten");
+        clevertap.event.push("Message Received");
+        clevertap.event.push("Message Viewed");
+        clevertap.event.push("Product add to cart");
+        getLS();
+      }
+
+      function pushSelectedEvents() {
+        var adc = document.getElementById("adc").checked;
+        var ps = document.getElementById("ps").checked;
+        var pv = document.getElementById("pv").checked;
+
+        if (!adc && !ps && !pv) {
+          alert("Select atleast one event");
+          return;
+        }
+        if (adc) clevertap.event.push("Added to Cart");
+        if (ps) clevertap.event.push("Product Sold");
+        if (pv) clevertap.event.push("Product Viewed");
+
+        document.getElementById("adc").checked = false;
+        document.getElementById("ps").checked = false;
+        document.getElementById("pv").checked = false;
+        getLS();
+      }
+
+      function enablePush() {
+        clevertap.notifications.push({
+          titleText: "Wish to receive push notifications?",
+          bodyText: "Click Yes to receive push notifications",
+          okButtonText: "Yes",
+          rejectButtonText: "No",
+          serviceWorkerPath: "/web-sdk-test/js/clevertap_sw.js",
+        });
+      }
+
+      function getLS() {
+        var LRU_CACHE = decodeURIComponent(localStorage["WZRK_X"]);
+        var WZRK_K = decodeURIComponent(localStorage["WZRK_K"]);
+        var WZRK_G = decodeURIComponent(localStorage["WZRK_G"]);
+        var WZRK_EV = decodeURIComponent(localStorage["WZRK_EV"]);
+        var WZRK_ARP = decodeURIComponent(localStorage["WZRK_ARP"]);
+
+        var data = `<div>WZRK_K: ${WZRK_K}</div><br /><div>WZRK_G: ${WZRK_G}</div><br /><div>LRU_CAHCE: ${LRU_CACHE}</div><br /><div>WZRK_EV: ${WZRK_EV}</div><br /><div>WZRK_ARP: ${WZRK_ARP}</div>`;
+
+        document.getElementById("lsData").innerHTML = data;
+      }
+
+      function clearLS() {
+        localStorage.clear();
+        getLS();
+      }
+
+      function getProfile() {
+        var customerType = clevertap.profile.getAttribute("Customer type");
+        console.log(customerType);
+      }
+    </script>
+
+    <link rel="stylesheet" href="/web-sdk-test/style.css" />
+    <!-- <br />
+        <button type="button" onclick="pushprofile()">Profile Push!</button>
+        <br />
+        <button type="button" onclick="pushProductSearched()">
+            Product Searched
+        </button>
+        <br />
+        <button type="button" onclick="pushEventAddToCart()">
+            Add to Cart!
+        </button>
+        <br />
+        <button type="button" onclick="pushcharged()">Charged!</button>
+        <br />
+        <button type="button" onclick="pushbid()">Bid!</button>
+        <br />
+        <button type="button" onclick="logout()">Deprecated -> Logout</button>
+        <br />
+        <button type="button" onclick="clearLocalStorage()">
+            Clear Local Storage
+        </button> -->
+
+    <div id="ct-banner" class="chetanclass"></div>
+
+    <div class="nav">
+      <!-- <span id="inbox">Whats New</span> -->
+      <img
+        id="bell-selector"
+        src="https://img.icons8.com/emoji/48/000000/bell-emoji.png"
+      />
+    </div>
+
+    <h1>Test A-JS</h1>
+    <button onclick="onClickPP()">Random PP</button>
+    <button onclick="onClickOUL()">Random OUL</button>
+    <button onclick="onClickEP()">Event Push</button>
+    <hr />
+    <br />
+    <p>On User Login</p>
+    <input type="text" id="constantOUL" class="textInput" /><input
+      type="text"
+      disabled
+      value="@gmail.com"
+      class="textInput"
+    />
+    <button onclick="onClickOULSame()" class="inputBtn">OUL</button>
+    <br />
+    <hr />
+    <br />
+    <hr />
+    <p>Profile Push</p>
+    <input type="text" id="constantPP" class="textInput" /><input
+      type="text"
+      disabled
+      value="@gmail.com"
+      class="textInput"
+    />
+    <button onclick="onClickPPSame()" class="inputBtn">PP</button>
+    <hr />
+
+    <br />
+    <hr />
+    <input type="checkbox" name="event" value="adc" id="adc" /> Added to Cart
+    <br />
+    <input type="checkbox" name="event" value="ps" id="ps" /> Product Sold
+    <br />
+    <input type="checkbox" name="event" value="pv" id="pv" /> Product Viewed
+    <br />
+    <button id="eventPushSelect" onclick="pushSelectedEvents()">
+      Push Selected Events
+    </button>
+
+    <button id="enablePushNotifications" onclick="enablePush()">
+      Enable Push Notifications
+    </button>
+    <br />
+    <hr />
+    <button
+      onclick="getLS()"
+      style="background: #2b39ff; color: white; padding: 5px"
+    >
+      Show Local Storage
+    </button>
+    <br /><br />
+    <button
+      onclick="clearLS()"
+      style="background: red; color: white; padding: 5px"
+    >
+      Clear Local Storage
+    </button>
+    <br />
+    <br />
+    <br />
+    <br />
+    <hr />
+
+    <div id="lsData"></div>
+    <img
+      src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-Ni40LzEwICAyMTQuM0sgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00137215-xfrypjkuws-portrait.jpg"
+      alt="Trulli"
+      width="500"
+      height="333"
+    />
+    <img
+      src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-Ni40LzEwICAyMjIuNEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00137215-xfrypjkuws-portrait.jpg"
+      alt="Trulli"
+      width="500"
+      height="333"
+    />
+    <img
+      src="https://assets-in.bmscdn.com/promotions/cms/creatives/1682617582350_webbannernpa.jpg"
+      alt="Trulli"
+      width="500"
+      height="333"
+    />
+  </body>
+</html>
