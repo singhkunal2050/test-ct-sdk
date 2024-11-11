@@ -21,6 +21,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         test: resolve(__dirname, "test.html"),
         spa: resolve(__dirname, "spa.html"),
+        apn: resolve(__dirname, "apn.html"),
       },
     },
   },

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- End Google Tag Manager -->
+    <link rel="manifest" href="/manifest.json" />
+    <title>My webpage!</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <script type="text/javascript">
+      var clevertap = {
+        event: [],
+        profile: [],
+        account: [],
+        onUserLogin: [],
+        notifications: [],
+        privacy: [],
+      };
+      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+      clevertap.account.push({ id: "W6Z-6Z5-975Z" });
+      clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
+      clevertap.privacy.push({ useIP: false });
+      clevertap.event.push("Web Push View", {
+        "Product Name": "Product1",
+        category: "cat1",
+        date_time: new Date("July 03, 2020 09:30:00"),
+        cartValue: 10,
+        epoch_value: "$D_1594717641",
+      });
+      clevertap.event.push("custom html event");
+      clevertap.onUserLogin.push({
+        Site: {
+          Name: "Web User",
+          Email: "abc123890456@example.com",
+          Identity: "78901234ABC",
+          Custom_Tag: "Champion",
+        },
+      });
+      // clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50,"Phone":"+919090909090"}});
+      //set the flag to true, if the user agrees to share their IP data
+      (function () {
+        var wzrk = document.createElement("script");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+        wzrk.src =
+          "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@b31af0853cbe7a641bd45d1ae34a989ed81c66a6/clevertap.js";
+        // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@track_sdk_drop_offs/clevertap.min.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+
+      // var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+      //  // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+      // clevertap.account.push({"id": "W6Z-6Z5-975Z"});
+
+      // clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
+      // clevertap.onUserLogin.push({"Site":{"Name":"Web User","Email":"abc@example.com","Identity":"xyz123","Custom_Tag":"Champion"}});//9889
+      // // clevertap.onUserLogin.push({"Site":{"Name":"Web User","Identity":"123qwerty","Custom_Tag":"Champion"}});
+      // // clevertap.event.push("Test ID Event",{"Identity":"43198"});
+      // clevertap.onUserLogin.push({"Site":{"Name":"Jay Mehta","Custom_Tag":"Champion","Identity":"6425","DOB":new Date(1575103663000),"Anniversary":new Date(1575103663000),"Language_Multi":['Tamil','Telgu']}});
+      // clevertap.profile.push({"Site":{"Identity":"6425","My_Key":"My_Value","MSG-push":true}});
+      // // clevertap.event.push("login",{"name":"ct"});
+      // // clevertap.event.push("signup",{"name":"ct"});
+
+      // timeFunction();
+      // // clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50}});
+      // clevertap.event.push("Web Push View",{"Product Name":"Product1","category":"cat1","date_time":new Date("July 03, 2020 09:30:00"),"cartValue":10,"epoch_value":"$D_1594717641"});
+      // clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
+      // function timeFunction() {
+      //             setTimeout(function(){ clevertap.event.push("Web Event"); }, 5000);
+      //             clevertap.event.push("Web Event Test");
+      //             // clevertap.profile.push({"Site":{"Custom_Tag":"Champ"}});
+      //         }
+      //  (function () {
+      // 		 var wzrk = document.createElement('script');
+      // 		 wzrk.type = 'text/javascript';
+      // 		 wzrk.async = true;
+      // 		 wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+      // 		 var s = document.getElementsByTagName('script')[0];
+      // 		 s.parentNode.insertBefore(wzrk, s);
+      //   })();
+
+      function dismissPopup() {
+        // var wrapper = window.parent.document.getElementById('wizParDiv2');
+        // wrapper.remove();
+        // if ('safari' in window && 'pushNotification' in window.safari) {
+        //       var permissionData = window.safari.pushNotification.permission('web.com.localhost.pushDemo');
+        //       checkRemotePermission(permissionData);
+        //   }
+
+        clevertap.notifications.push({
+          apnsWebPushId: "web.com.localhost.pushDemo", //only for safari browser
+          apnsWebPushServiceUrl:
+            "https://us-central1-chetan-s-demo-app.cloudfunctions.net/api", //only for safari browser
+          titleText: "Would you like to receive Push Notifications?",
+          bodyText:
+            "We promise to only send you relevant content and give you updates on your transactions",
+          okButtonText: "Sign me up!",
+          rejectButtonText: "No thanks",
+          okButtonColor: "#f28046",
+          hidePoweredByCT: true,
+          serviceWorkerPath: "/clevertap_sw.js",
+        });
+      }
+      //"serviceWorkerPath": "/clevertap_sw.js
+      // var checkRemotePermission = function (permissionData) {
+      //     if (permissionData.permission === 'default') {
+      //         // This is a new web service URL and its validity is unknown.
+      //         window.safari.pushNotification.requestPermission(
+      //             'https://shore-zany-tangelo.glitch.me', // The web service URL.
+      //             'web.com.localhost.pushDemo',     // The Website Push ID.
+      //             {}, // Data that you choose to send to your server to help you identify the user.
+      //             checkRemotePermission         // The callback function.
+      //         );
+      //     }
+      //     else if (permissionData.permission === 'denied') {
+      //       console.log("NO ",permissionData);
+      //         // The user said no.
+      //     }
+      //     else if (permissionData.permission === 'granted') {
+      //         // The web service URL is a valid push provider, and the user said yes.
+      //         // permissionData.deviceToken is now available to use.
+      //         console.log(permissionData.deviceToken);
+      //     }
+      // };
+    </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-M2PK5TM"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>Hello, World!</h1>
+    <h4 id="date"></h4>
+
+    <div class="image-section">
+      <div class="section-style">
+        <img src="https://picsum.photos/400/200" alt="" />
+        <p>A random image courtesy of picsum.com.</p>
+        <a href="page_2.html" target="_self">Visit 2 Page</a>
+        <button class="btn" onclick="dismissPopup()">DISMISS</button>
+      </div>
+
+      <div class="section-style">
+        <img src="https://picsum.photos/400/200" alt="" />
+        <p>A random image courtesy of picsum.com.</p>
+      </div>
+    </div>
+
+    <div class="image-section">
+      <div class="section-style">
+        <img src="https://picsum.photos/400/200" alt="" />
+        <p>A random image courtesy of picsum.com.</p>
+      </div>
+
+      <div class="section-style">
+        <img src="https://picsum.photos/400/200" alt="" />
+        <p>A random image courtesy of picsum.com.</p>
+      </div>
+    </div>
+  </body>
+</html>
