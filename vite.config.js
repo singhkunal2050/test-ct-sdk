@@ -12,6 +12,10 @@ export default defineConfig({
           src: "clevertap_sw.js", // Path to your service worker
           dest: "", // Destination directory within the dist folder
         },
+        {
+          src: "serviceworker.js",
+          dest: "",
+        },
       ],
     }),
   ],
