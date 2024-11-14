@@ -37,6 +37,7 @@ self.addEventListener("activate", function (event) {
 });
 
 self.addEventListener("push", function (event) {
+  debugger;
   console.log("Push event: ", event);
   // get all the notification data
   var notificationData = JSON.parse(event.data.text());
@@ -65,6 +66,7 @@ self.addEventListener("push", function (event) {
   globalRedirectPath = notificationData.redirectPath;
   globalNotificationData = notificationData;
 
+  debugger;
   var raiseNotificationViewedPath =
     notificationData.raiseNotificationViewedPath;
   if (typeof raiseNotificationViewedPath !== "undefined") {
@@ -126,6 +128,7 @@ function onClick(event, redirectPath, notificationData) {
 }
 
 self.addEventListener("notificationclick", function (event) {
+  debugger;
   var notification = event.notification;
   var data = notification.data;
   var key;
