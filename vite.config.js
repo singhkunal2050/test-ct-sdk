@@ -16,6 +16,14 @@ export default defineConfig({
           src: "serviceworker.js",
           dest: "",
         },
+        {
+          src: "manifest.json",
+          dest: "",
+        },
+        {
+          src: "assets",
+          dest: "",
+        },
       ],
     }),
   ],
