@@ -6,7 +6,7 @@
   "background_color": "#00237b",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/assets/android.ico",
       "sizes": "512x512",
       "type": "image/png"
     }
