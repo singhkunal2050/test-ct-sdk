@@ -6,7 +6,7 @@ import clevertap from 'clevertap-web-sdk';
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const accountId = urlParams.get("accountId");
+const accountId = urlParams.get("accountId") ?? `ZWW-WWW-WWRZ`;
 const region = urlParams.get("region");
 const token = urlParams.get("token");
 

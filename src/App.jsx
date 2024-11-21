@@ -1,45 +1,35 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import clevertap from 'clevertap-web-sdk';
+import Home from "./views/Home";
+import UseCases from "./views/UseCases";
+import About from "./views/About";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [accountId, setAccountId] = useState("ZWW-WWW-WWRZ");
-  const [token, setToken] = useState("000-001");
-  const [region, setRegion] = useState("eu1");
-
-  const pushEvent = () => {
-    clevertap.event.push("Added To Cart", {
-      "Product name":"Armani Skinny Fit Jeans 28",
-      "Category":"CLICK FOR Mens Accessories",
-      "Price":53.02,
-    "CT test": "test from console"
-    });
-  }
-
-  useEffect(() => {
-    // clevertap.account.push({ id: accountId }, region, "", token);
-  }, []);
-
   return (
-    <>
-      <div>
-          <nav data-count={count}>
-          {count % 2 == 0 ? <div id="bell-selector">🛎️</div> : ''}
-          <button onClick={pushEvent}>Push Event For Web Inbox Notification</button>
-         </nav>
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/spa">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/usecases">Use Cases</Link>
+          </li>
+          <div className="bell-wrapper">
+          <div id="bell-selector">🛎️</div>
+          </div>
+        </ul>
+      </nav>
 
-        <h1>Clevertap Web SDK SPA Test</h1>
-        <div className="card">
-          <p>Increment Count to rerender the Inbox Icon</p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-        </div>
-      </div>
-    </>
+      <Routes>
+        <Route path="/spa" element={<Home />} />
+        <Route path="/usecases" element={<UseCases />} /> 
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
 }
 
