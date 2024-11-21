@@ -12,7 +12,7 @@
 2. SPA
    - Run ` npm run dev` in the root directory
    - Open ` http://localhost:5173/spa` in your browser
-   - Test all the SPA Routes
+   - Test different Use cases from /usecases route
 
 ### How to deploy to Netlify
 
