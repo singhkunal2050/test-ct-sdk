@@ -24,16 +24,17 @@ export default defineConfig({
           src: "assets",
           dest: "",
         },
+        {
+          src: "staticPages/*.html", // Glob pattern to match all HTML files under staticPages
+          dest: "", // Destination root directory in the dist folder
+        },
       ],
     }),
   ],
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"),
-        test: resolve(__dirname, "test.html"),
         spa: resolve(__dirname, "spa.html"),
-        apn: resolve(__dirname, "apn.html"),
       },
     },
   },
