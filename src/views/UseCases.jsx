@@ -104,38 +104,44 @@ const UseCases = () => {
 
   return (
     <div>
-      <h1>Use Cases</h1>
-      <button onClick={pushProfile}>Random Profile Push</button>
-      <button onClick={() => pushEvent("Product Searched")}>
-        Product Searched
-      </button>
-      <button onClick={() => pushEvent("Added to Cart")}>Add to Cart</button>
-      <button onClick={() => pushEvent("Charged", { "Product name": "Watch" })}>
-        Charged
-      </button>
-      <button onClick={enablePushNotifications}>
-        Enable Push Notifications
-      </button>
-      <button onClick={clearLocalStorage}>Clear Local Storage</button>
-      <hr />
-      <div>
-        <label>
-          <input type="checkbox" id="adc" /> Added to Cart
-        </label>
-        <br />
-        <label>
-          <input type="checkbox" id="ps" /> Product Sold
-        </label>
-        <br />
-        <label>
-          <input type="checkbox" id="pv" /> Product Viewed
-        </label>
-        <br />
-        <button onClick={pushSelectedEvents}>Push Selected Events</button>
-      </div>
-      <hr />
-      <button onClick={handleShowLocalStorage}>Show Local Storage</button>
-      {localStorageData && <div>{localStorageData}</div>}
+    <section>
+        
+          <h1>Use Cases</h1>
+          <button onClick={pushProfile}>Random Profile Push</button>
+          <button onClick={() => pushEvent("Product Searched")}>
+            Product Searched
+          </button>
+          <button onClick={() => pushEvent("Added to Cart")}>Add to Cart</button>
+          <button onClick={() => pushEvent("Charged", { "Product name": "Watch" })}>
+            Charged
+          </button>
+          <button onClick={enablePushNotifications}>
+            Enable Push Notifications
+          </button>
+          <button onClick={clearLocalStorage}>Clear Local Storage</button>
+    </section>
+<br /><br />
+      <section>
+          <div>
+            <label>
+              <input type="checkbox" id="adc" /> Added to Cart
+            </label>
+            <br />
+            <label>
+              <input type="checkbox" id="ps" /> Product Sold
+            </label>
+            <br />
+            <label>
+              <input type="checkbox" id="pv" /> Product Viewed
+            </label>
+            <br />
+            <button onClick={pushSelectedEvents}>Push Selected Events</button>
+          </div>
+
+          <br /> <br />
+          <button onClick={handleShowLocalStorage}>Show Local Storage</button>
+          {localStorageData && <div>{localStorageData}</div>}
+      </section>
     </div>
   );
 };
