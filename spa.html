@@ -10,10 +10,15 @@
       href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
     />
   </head>
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const accountId = urlParams.get("accountId");
+    const region = urlParams.get("region");
+    const token = urlParams.get("token");
+  </script>
   <body>
-    <div id="root">
-      <h3>Test Clevertap NPM Installation Setup</h3>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
