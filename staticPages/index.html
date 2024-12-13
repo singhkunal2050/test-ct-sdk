@@ -86,6 +86,7 @@
             "product name": "Lamb Curry Cut1",
             Price: 298,
             Long_1: 6473329386,
+            enablePush,
             Long_2: 2,
             Currency: "INR",
           });
@@ -209,6 +210,22 @@
           });
         }
 
+        function enableAPNS() {
+          clevertap.notifications.push({
+            apnsWebPushId: "web.com.localhost.pushDemo", //only for safari browser
+            apnsWebPushServiceUrl:
+              "https://us-central1-chetan-s-demo-app.cloudfunctions.net/api", //only for safari browser
+            titleText: "Would you like to receive Push Notifications?",
+            bodyText:
+              "We promise to only send you relevant content and give you updates on your transactions",
+            okButtonText: "Sign me up!",
+            rejectButtonText: "No thanks",
+            okButtonColor: "#f28046",
+            hidePoweredByCT: true,
+            serviceWorkerPath: "/clevertap_sw.js",
+          });
+        }
+
         function getLS() {
           var LRU_CACHE = decodeURIComponent(localStorage["WZRK_X"]);
           var WZRK_K = decodeURIComponent(localStorage["WZRK_K"]);
@@ -302,6 +319,9 @@
         <button id="enablePushNotifications" onclick="enablePush()">
           Enable Push Notifications
         </button>
+
+        <button onclick="enableAPNS">Enable APNs Notifications</button>
+
         <br />
         <hr />
         <button
