@@ -26,3 +26,11 @@
 8. Go to the site URL and test
 9. Note all the staticPages would be directly available in the website due to the vite.config.js configuration
 10. The SPA App would be available at the /spa route
+
+
+### Pages 
+
+1. /spa : SPA App
+2. /customWebInbox : Custom Web Inbox
+3. / : All Basic Events and Lifecycle
+4. / : Web Inbox
