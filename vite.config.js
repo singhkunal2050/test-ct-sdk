@@ -13,10 +13,6 @@ export default defineConfig({
           dest: "", // Destination directory within the dist folder
         },
         {
-          src: "serviceworker.js",
-          dest: "",
-        },
-        {
           src: "manifest.json",
           dest: "",
         },
