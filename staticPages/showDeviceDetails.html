@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div class="device-details"></div>
-</body>
-<script>
-        // Function to render navigator details 
-
-        function renderNavigatorDetails() {
-            const userAgent = navigator.userAgent;
-            const detailsContainer = document.querySelector('.device-details');
-            const chromeIndex = navigator.userAgent.indexOf('Chrome');
-            const firefoxIndex = navigator.userAgent.indexOf('Firefox');
-            const safariIndex = navigator.userAgent.indexOf('Safari');
-
-            const data = `
-                userAgent: ${userAgent}
-                Chrome Index: ${chromeIndex}
-                Firefox Index: ${firefoxIndex}  
-                Safari Index: ${safariIndex}
-            `;
-
-            detailsContainer.innerText = data;
+    <style>
+        .device-details {
+            display: flex;
+            flex-direction: column;
+            gap:5px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+    </style>
+  </head>
+  <body>
+    <div class="device-details"></div>
+  </body>
+  <script>
+    // Function to render navigator details
 
-        // Call the function to render the details
-        renderNavigatorDetails();
+    function renderNavigatorDetails() {
+        const userAgent = navigator.userAgent;
+        const detailsContainer = document.querySelector('.device-details');
+        const chromeIndex = navigator.userAgent.indexOf('Chrome');
+        const firefoxIndex = navigator.userAgent.indexOf('Firefox');
+        const safariIndex = navigator.userAgent.indexOf('Safari');
+        const [appCodeName,appName, appVersion] = [navigator.appCodeName, navigator.appName, navigator.appVersion]
 
 
-</script>
+        const data = `
+            <div>User Agent: ${userAgent}</div>
+            <div>Chrome Index: ${chromeIndex}</div>
+            <div>Firefox Index: ${firefoxIndex}</div>
+            <div>Safari Index: ${safariIndex}</div>
+            <div>appCodeName: ${appCodeName}</div>
+            <div>appName: ${appName}</div>
+        `;
+
+        detailsContainer.innerHTML = data;
+    }
+
+    // Call the function to render the details
+    renderNavigatorDetails();
+  </script>
 </html>
