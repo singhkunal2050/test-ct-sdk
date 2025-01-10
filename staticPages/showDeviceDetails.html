@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="device-details"></div>
+</body>
+<script>
+        // Function to render navigator details 
+
+        function renderNavigatorDetails() {
+            const userAgent = navigator.userAgent;
+            const detailsContainer = document.querySelector('.device-details');
+            const chromeIndex = navigator.userAgent.indexOf('Chrome');
+            const firefoxIndex = navigator.userAgent.indexOf('Firefox');
+            const safariIndex = navigator.userAgent.indexOf('Safari');
+
+            const data = `
+                userAgent: ${userAgent}
+                Chrome Index: ${chromeIndex}
+                Firefox Index: ${firefoxIndex}  
+                Safari Index: ${safariIndex}
+            `;
+
+            detailsContainer.innerText = data;
+        }
+
+        // Call the function to render the details
+        renderNavigatorDetails();
+
+
+</script>
+</html>
