@@ -13,6 +13,17 @@
     </nav>
     <section>
       <script type="text/javascript">
+        // Append #bell-selector to the DOM after 3 seconds
+        // Test the scenario where the Node comes later
+        // setTimeout(() => {
+        //   const bellSelector = document.createElement("div");
+        //   bellSelector.id = "bell-selector";
+        //   bellSelector.innerHTML = "🛎️";
+        //   document.querySelector("nav").appendChild(bellSelector);
+        // },5000)
+
+
+
         document.addEventListener("CT_web_personalization", function (event) {
           const data = event.detail;
           const topic = data.kv.topic;
@@ -413,8 +424,9 @@
       s.parentNode.insertBefore(wzrk, s);
     })();
 
+    // clevertap.event.push("Product Viewed");
     clevertap.event.push("Product Viewed");
-    clevertap.event.push("Product Viewed");
+    // clevertap.event.push('Added To Cart')
   </script>
   <style>
     #bell-selector {

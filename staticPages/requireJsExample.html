@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleverTap with RequireJS</title>
+    <script src="
+        https://cdn.jsdelivr.net/npm/requirejs@2.3.7/require.min.js
+    "></script>
+    <script>
+        require.config({
+            paths: {
+                clevertap: 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min'
+            },
+            shim: {
+                clevertap: {
+                    exports: 'clevertap'
+                }
+            }
+        });
+
+        // get accountId and region from query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const accountId = urlParams.get('accountId');   
+        const region = urlParams.get('region');
+
+        require(['clevertap'], function (clevertap) {
+            clevertap.init(accountId, region);
+            clevertap.event.push("Test Event");
+            console.log('CleverTap Initialized:', clevertap);
+        });
+    </script>
+</head>
+<body>
+    <h1>CleverTap with RequireJS Example</h1>
+</body>
+</html>
