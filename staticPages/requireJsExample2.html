@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleverTap with RequireJS</title>
+    <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.7/require.min.js"></script>
+    <script>
+        require.config({
+            paths: {
+                clevertap: 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min',
+                initCleverTap: './init-clevertap' // Path to your external initialization file
+            },
+            shim: {
+                clevertap: {
+                    exports: 'clevertap'
+                }
+            }
+        });
+
+        // Load the initialization module
+        require(['initCleverTap'], function () {
+            console.log('CleverTap initialized via external file');
+        });
+    </script>
+</head>
+<body>
+    <h1>CleverTap with RequireJS Example</h1>
+</body>
+</html>

@@ -24,6 +24,10 @@ export default defineConfig({
           src: "staticPages/*.html", // Glob pattern to match all HTML files under staticPages
           dest: "", // Destination root directory in the dist folder
         },
+        {
+          src: "staticPages/*.js", // Glob pattern to match all JS files under staticPages
+          dest: "", // Destination root directory in the dist folder
+        },
       ],
     }),
   ],
