@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "clevertap-web-sdk": "^1.11.5",
+    "clevertap-web-sdk": "github:CleverTap/clevertap-web-sdk#WEB-3387-2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
