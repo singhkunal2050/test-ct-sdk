@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./views/Home";
 import UseCases from "./views/UseCases";
 import About from "./views/About";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 
 function App() {
   return (
@@ -18,18 +18,32 @@ function App() {
           <li>
             <Link to="/usecases">Use Cases</Link>
           </li>
-          <div className="bell-wrapper">
-          <div id="bell-selector">🛎️</div>
-          </div>
         </ul>
       </nav>
 
+      <BellIcon />
+
       <Routes>
         <Route path="/spa" element={<Home />} />
-        <Route path="/usecases" element={<UseCases />} /> 
+        <Route path="/usecases" element={<UseCases />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
+  );
+}
+
+function BellIcon() {
+  const location = useLocation();
+
+  return (
+    <>
+    {/* Bell selector should not be visible on About page */}
+      {location.pathname !== "/about" && (
+        <div className="bell-wrapper">
+          <div id="bell-selector">🛎️</div>
+        </div>
+      )}
+    </>
   );
 }
 
