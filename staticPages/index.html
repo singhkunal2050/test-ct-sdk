@@ -412,16 +412,17 @@
       privacy: [],
     };
     // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-    clevertap.account.push({ id: accountId }, region, "", token);
+    // clevertap.account.push({ id: accountId }, region, "", token);
+    clevertap.account.push({ id: "W67-774-7Z5Z" }, "us1");
     clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
     clevertap.privacy.push({ useIP: false }); //set the flag to true, if the user agre   es to share their IP data
     (function () {
       var wzrk = document.createElement("script");
       wzrk.type = "text/javascript";
       wzrk.async = true;
-      // wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js";
-      wzrk.src =
-          "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@bd809c1a3206c0986d594fff13985dd890fc5977/clevertap.js";
+      wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js";
+      // wzrk.src =
+      //     "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@ed0ae74feb72a07841579ec725a23dd791eb2ec5/clevertap.js";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(wzrk, s);
     })();
