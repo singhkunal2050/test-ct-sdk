@@ -8,6 +8,12 @@
     <script async src="./javascript/index.js"></script>
 
     <script type="text/javascript">
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const accountId = urlParams.get("accountId");
+      const region = urlParams.get("region");
+      const token = urlParams.get("token");
+
       var clevertap = {
         event: [],
         profile: [],
@@ -17,7 +23,9 @@
         privacy: [],
       };
       // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-      clevertap.account.push({ id: "W6Z-6Z5-975Z" });
+      // clevertap.account.push({ id: "W6Z-6Z5-975Z" });
+      clevertap.account.push({ id: accountId }, region, "", token);
+
       clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
       clevertap.privacy.push({ useIP: false });
       clevertap.event.push("Web Push View", {
@@ -43,7 +51,7 @@
         wzrk.type = "text/javascript";
         wzrk.async = true;
         wzrk.src =
-          "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@a616602882b68f15ed47b8415dd6d6cddec8f178/clevertap.js";
+          "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@79ea64143b51a70c5ba02fdb46eaf23871650639/clevertap.js"
         // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
         // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@track_sdk_drop_offs/clevertap.min.js';
         var s = document.getElementsByTagName("script")[0];
