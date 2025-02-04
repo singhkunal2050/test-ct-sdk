@@ -13,7 +13,9 @@ const token = urlParams.get("token");
 // var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
 clevertap.init(accountId); // Replace YOUR_ACCOUNT_ID, can be initialized just once
 clevertap.spa = true 
-clevertap.setOffline(false);
+setTimeout(() => {
+ clevertap.setOffline(false)
+}, 1000);
  clevertap.notifications.push({
     titleText: "Would you like to receive Push Notifications?",
     bodyText:
