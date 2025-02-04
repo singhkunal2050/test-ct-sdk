@@ -13,7 +13,7 @@ const token = urlParams.get("token");
 // var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
 clevertap.init(accountId); // Replace YOUR_ACCOUNT_ID, can be initialized just once
 clevertap.spa = true 
-
+clevertap.setOffline(false);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
