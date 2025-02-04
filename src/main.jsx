@@ -14,6 +14,14 @@ const token = urlParams.get("token");
 clevertap.init(accountId); // Replace YOUR_ACCOUNT_ID, can be initialized just once
 clevertap.spa = true 
 clevertap.setOffline(false);
+ clevertap.notifications.push({
+    titleText: "Would you like to receive Push Notifications?",
+    bodyText:
+      "We promise to only send you relevant content and give you updates on your transactions",
+    okButtonText: "Sign me up!",
+    rejectButtonText: "No thanks",
+    okButtonColor: "#F28046",
+  });
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
