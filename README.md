@@ -1,5 +1,7 @@
 # URLs to Test the Apps
 
+Deployment Status : [![Netlify Status](https://api.netlify.com/api/v1/badges/a2ade46d-abfd-4aa1-8d1f-6496a72ac851/deploy-status)](https://app.netlify.com/sites/clevertap-sdk-test/deploys)
+
 1. Static : https://clevertap-sdk-test.netlify.app/?region=eu1&accountId={accountID}&token={token}
 2. Reac SPA : https://clevertap-sdk-test.netlify.app/spa?region=eu1&accountId={accountID}&token={token}
 
