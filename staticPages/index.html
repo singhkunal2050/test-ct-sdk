@@ -400,8 +400,8 @@
     // Get Account id and region from query string
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const accountId = urlParams.get("accountId");
-    const region = urlParams.get("region");
+    const accountId = urlParams.get("accountId") ?? `ZWW-WWW-WWRZ`;
+    const region = urlParams.get("region") ?? `eu1`;
     const token = urlParams.get("token");
 
     var clevertap = {
