@@ -143,10 +143,12 @@
         // Check if the key exists in any of the group and return index if it does or return false 
         let i = 0;
         for (const group in grouped) {
-            const existingCampaign = grouped[group].find(campaign => campaign?.display?.divSelector === key || campaign.display?.details[0]?.selectorData?.includes(key));
+            const existingCampaign = grouped[group].find(campaign => {
+                return campaign?.display?.divSelector === key || campaign.display?.details[0]?.selectorData?.map(a=>a.selector)?.includes(key);
+            });
 
             if (existingCampaign) {
-                return { value: true , key : existingCampaign.display.divSelector ?? existingCampaign.display?.details[0]?.selectorData[0]}; 
+                return { value: true , key : existingCampaign.display.divSelector ?? existingCampaign.display?.details[0]?.selectorData[0]?.selector}; 
             }
             i++;
         }
