@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleverTap Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+	<script type="text/javascript">
+		if (window.CleverTap) { }
+		else {
+			var clevertap = {
+				event: [],
+				profile: [],
+				account: [],
+				onUserLogin: [],
+				notifications: [],
+				privacy: [],
+				token: "YCM-KMD-OEUL"
+			};
+			// replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+			clevertap.account.push({ "id": "TEST-5WK-87Z-666Z" });
+
+			clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
+
+			(function () {
+				var wzrk = document.createElement("script");
+       			wzrk.type = "text/javascript";
+        		wzrk.async = true;
+        		wzrk.src =
+          		("https:" == document.location.protocol
+            	? "https://d2r1yp2w7bby2u.cloudfront.net"
+            	: "http://static.clevertap.com") + "/js/clevertap.min.js";
+        		var s = document.getElementsByTagName("script")[0];
+        		s.parentNode.insertBefore(wzrk, s);
+			})();
+
+			
+		}
+		console.log("Web SDK called");
+
+	</script>
+
+	<link rel="manifest" href="/manifest.json" />
+</head>
+
+<body bgcolor="#ffffff" class="" onload="getValuesPE()">
+    <div class="container">
+        <h1>CleverTap Web Integration</h1>
+        
+        <label for="identity">User Details:</label>
+        <input type="text" id="identity" placeholder="Enter User ID"/>
+        <input type="text" id="email" placeholder="Enter Email"/>
+        <input type="text" id="phone" placeholder="Enter Phone"/>
+        <button onclick="loginUser()">Login User</button>
+        <label for="event">Track Event:</label>
+        <input type="text" id="eventnm" placeholder="Enter Event Name">
+        <button onclick="definev()">Track Event</button>
+        
+    </div>
+	</body>
+
+	<script>
+
+		let getValuesPE = () =>{
+			clevertap.fetchVariables(() => { console.log('Fetch successful'); });
+			let userData = localStorage.getItem("WZRK_PE");
+
+			console.log(userData); 
+		};
+
+
+		let definev = () => {
+
+			if(window.CleverTap){
+
+			}
+			else{
+				clevertap.setLogLevel(4)
+				const var1 = clevertap.defineVariable("webvarstring", "str")  
+				const var2 = clevertap.defineVariable("webbanner", true)
+				clevertap.syncVariables()
+			}
+		}
+
+		let email_capture = () => {
+			if (window.CleverTap) {
+				CleverTap.pushEvent("Sign Up Webview");
+				testalert();
+			}
+			else {
+				clevertap.event.push("Sign Up");
+				console.log("Sign Up");
+			}
+		};
+
+		let phone_capture = () => {
+			if (window.CleverTap) {
+				CleverTap.pushEvent("ShowPhonePopup Webview");
+				testalert();
+			}
+			else {
+				clevertap.event.push("ShowPhonePopup");
+				console.log("ShowPhonePopup");
+			}
+		};
+
+		let sendEvent = () => {
+			if (window.CleverTap) {
+				CleverTap.pushEvent(document.getElementById('eventnm').value);
+				testalert();
+			}
+			else {
+				clevertap.event.push(document.getElementById('eventnm').value);
+				console.log("EVENT from website");
+			}
+		};
+
+		let webNativeEvent = () => {
+			if (window.CleverTap) {
+				CleverTap.pushEvent("fetchWebnative");
+				testalert();
+			}
+			else {
+				clevertap.event.push("fetchWebnative");
+				console.log("fetchWebnative");
+			}
+		};
+
+		let loginUser = () => {
+			var logindetails = {
+				"Name": "Aditya W",            // String
+				"Identity": document.getElementById('identity').value ,              // String or number
+				"Email": document.getElementById('email').value,         // Email address of the user
+				"Phone": document.getElementById('phone').value,           // Phone (with the country code)
+				"Gender": "M",                     // Can be either M or F
+				"DOB": new Date(),                 // Date of Birth. Date object
+				"MSG-email": true,                // Disable email notifications
+				"MSG-push": true,                  // Enable push notifications
+				"MSG-sms": true,                   // Enable sms notifications
+				"MSG-whatsapp": true,              // Enable WhatsApp notifications
+			}
+
+			if (window.CleverTap) {
+				CleverTap.onUserLogin(JSON.stringify(logindetails));
+				console.log("onUserLogin from Webview");
+				testalert();
+			}
+			else {
+				clevertap.onUserLogin.push({
+					"Site": logindetails
+				});
+				console.log("onUserLogin from website");
+				console.log(JSON.stringify(logindetails));
+				console.log(logindetails);
+			}
+
+		};
+		
+		
+		let showctid = () => {
+			var ctid = clevertap.getCleverTapID();
+			document.getElementById("test").innerHTML = ctid;
+		};
+
+	
+	</script>
+	<br /><br />
+
+
+	<script>
+		let pushnotif = () => {
+
+		};
+
+		clevertap.notifications.push({
+   	        "titleText": "Would you like to receive Push Notifications?",
+   		"bodyText": "We promise to only send you relevant content and give you updates on your transactions",
+   		"okButtonText": "Sign me up!",
+   		"rejectButtonText": "No thanks",
+   		"okButtonColor":"#F28046",
+   		"askAgainTimeInSeconds":5,
+        "serviceWorkerPath": "/clevertap_sw.js"
+
+  	});
+
+
+function renderCartDropOffPersonalisationCampaign(data) {
+	console.log("Inside renderCartDropOffPersonalisationCampaign -");
+	const name = data.kv.name;
+  const product = data.kv.product;
+  const containerEl = document.getElementById('container')
+  //const username = containerEl.getElementsByTagName('user-name')
+  const tags = containerEl.getElementsByTagName('span')
+
+  for (let i = 0; i < tags.length; i++) {
+            if (tags[i].id == "user-name") {
+				const txt = document.createTextNode(name);
+				tags[i].appendChild(txt)
+            }
+			else if(tags[i].id == "product-name"){
+				const txt = document.createTextNode(product);
+				tags[i].appendChild(txt)
+			}
+        }
+
+  console.log("Completed renderCartDropOffPersonalisationCampaign -");
+}
+
+document.addEventListener("CT_web_native_display", function(event) {
+  const data = event.detail;
+	const topic = data.kv.topic;
+	switch (topic) {
+		case "fetchWebnative": {
+			console.log("InsideEventListener - fetchWebnative");
+			renderCartDropOffPersonalisationCampaign(data)
+			break;
+   	}
+  }
+});
+
+/*let customNotificationPayload = {
+    msgId: string // required
+    pivotId?: string // optional - String value containing an A/B testing campaign's variant name.
+ }
+
+window.parent.clevertap.notificationCallback = function(msg){
+      //raise the notification viewed and clicked events in the callback
+      clevertap.renderNotificationViewed(customNotificationPayload);
+       console.log("--------Inside callback");     
+      console.log(JSON.stringify(msg));            //your custom rendering implementation here
+      var $button = jQuery("<button></button>");   //element on whose click you want to raise the notification clicked event
+      $button.click(function(){
+         clevertap.renderNotificationClicked(customNotificationPayload);
+     });
+};		*/
+
+</script>
+
+
+
+</html>
