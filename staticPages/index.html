@@ -414,6 +414,9 @@
       onUserLogin: [],
       notifications: [],
       privacy: [],
+      config : {
+        customId : "testing_custom_id"
+      }
     };
     // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
     clevertap.account.push({ id: accountId }, region, "", token);
@@ -426,7 +429,7 @@
       wzrk.async = true;
       // wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.js";
       // wzrk.src = "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@master/clevertap.js"
-      wzrk.src = "https://static.clevertap.com/staging/master/js/clevertap.js"
+      wzrk.src = "https://static.clevertap.com/staging/develop/js/clevertap.js"
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(wzrk, s);
     })();

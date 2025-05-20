@@ -11,7 +11,8 @@ const region = urlParams.get("region") ?? 'eu1';
 const token = urlParams.get("token");
 
 // var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
-clevertap.init(accountId, region); // Replace YOUR_ACCOUNT_ID, can be initialized just once
+clevertap.init(accountId, region, '' , '' , { customId: 'test_spa_id', antiFlicker : {}}); // Replace YOUR_ACCOUNT_ID, can be initialized just once
+// clevertap.init(accountId, region); // Replace YOUR_ACCOUNT_ID, can be initialized just once
 clevertap.spa = true 
 setTimeout(() => {
  clevertap.setOffline(false)
