@@ -29,10 +29,37 @@ Deployment Status : [![Netlify Status](https://api.netlify.com/api/v1/badges/a2a
 9. Note all the staticPages would be directly available in the website due to the vite.config.js configuration
 10. The SPA App would be available at the /spa route
 
-
-### Pages 
+### Pages
 
 1. /spa : SPA App
 2. /customWebInbox : Custom Web Inbox
 3. / : All Basic Events and Lifecycle
 4. / : Web Inbox
+
+### Testing
+
+1. Install VSCode Extension for Playwright : https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright
+
+2. Use the test section in the sidebar to do the testing
+
+![alt text](assets/image.png)
+
+```bash
+  npx playwright test
+    Runs the end-to-end tests.
+
+  npx playwright test --ui
+    Starts the interactive UI mode.
+
+  npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  npx playwright test example
+    Runs the tests in a specific file.
+
+  npx playwright test --debug
+    Runs the tests in debug mode.
+
+  npx playwright codegen
+    Auto generate tests with Codegen.
+```
