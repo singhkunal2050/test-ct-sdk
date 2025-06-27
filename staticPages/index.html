@@ -408,6 +408,7 @@
     const accountId = urlParams.get("accountId") ?? `8W8-ZKW-5K7Z`;
     const region = urlParams.get("region") ?? `sk1`;
     const token = urlParams.get("token");
+    const sdkBranch = urlParams.get("sdkBranch") ?? `develop`;
 
     var clevertap = {
       event: [],
@@ -429,9 +430,8 @@
       var wzrk = document.createElement("script");
       wzrk.type = "text/javascript";
       wzrk.async = true;
-      // wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.js";
-      // wzrk.src = "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@master/clevertap.js"
-      wzrk.src = "https://static.clevertap.com/staging/WEB-3773/js/clevertap.js"
+      // wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js";
+      wzrk.src = `https://static.clevertap.com/staging/${sdkBranch}/js/clevertap.js`
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(wzrk, s);
     })();
